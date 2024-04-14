@@ -49,7 +49,6 @@ class _PopularProductsState extends State<PopularProducts> {
 
                       if (snapshot.data![index].rating != null) {
                         if (snapshot.data![index].rating!.isPopular) {
-                          print(snapshot.data![index].id);
                           return Padding(
                             padding: const EdgeInsets.only(left: 20),
                             child: ProductCard(

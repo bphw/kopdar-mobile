@@ -14,7 +14,6 @@ Future<List<OnlineProduct>> fetchOnlineProducts() async {
 }
 
 Future<OnlineProduct> fetchOnlineProduct(int id) async {
-  print('call now http://$endpointUrl/product/id/$id');
   final response = await http.get(Uri.parse('http://$endpointUrl/product/id/$id'));
   if (response.statusCode != 200) {
     throw Exception('Failed load Online Product by ID @ $id');

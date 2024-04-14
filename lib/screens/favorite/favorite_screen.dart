@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:kopdar_app/components/product_card.dart';
 import 'package:kopdar_app/models/online_product.dart';
 import 'package:kopdar_app/screens/details/details_screen.dart';
-import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 
 class FavoriteScreen extends StatefulWidget {
@@ -18,8 +17,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   void initState() {
     super.initState();
     futureProducts = fetchOnlineProducts();
-    print('eeeee');
-    print(futureProducts);
   }
 
   @override

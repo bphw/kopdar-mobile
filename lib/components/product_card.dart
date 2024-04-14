@@ -36,7 +36,7 @@ class ProductCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: product.images.isNotEmpty
-                    ? (product.images[0] != null
+                    ? (product.images[0].isNotEmpty
                         ? Image.network(product.images[0])
                         : Image.asset('assets/images/No-image-available.png'))
                     : Image.asset('assets/images/No-image-available.png'),
