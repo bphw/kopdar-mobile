@@ -49,6 +49,7 @@ class _PopularProductsState extends State<PopularProducts> {
 
                       if (snapshot.data![index].rating != null) {
                         if (snapshot.data![index].rating!.isPopular) {
+                          print(snapshot.data![index].id);
                           return Padding(
                             padding: const EdgeInsets.only(left: 20),
                             child: ProductCard(
@@ -88,22 +89,23 @@ class _PopularProductsState extends State<PopularProducts> {
 class ProductList extends StatelessWidget {
   const ProductList({super.key, required this.products});
   final List<OnlineProduct> products;
+
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [...List.generate(
-      demoProducts.length, (index) {
-        if (demoProducts[index].rating!.isPopular) {
+      products.length, (index) {
+        if (products[index].rating!.isPopular) {
           return Padding(
             padding: const EdgeInsets.only(left: 20),
             child: ProductCard(
-              product: demoProducts[index],
+              product: products[index],
               onPress: () =>
                   Navigator.pushNamed(
                     context,
                     DetailsScreen.routeName,
                     arguments: ProductDetailsArguments(
-                        product: demoProducts[index]),
+                        product: products[index]),
                   ),
             ),
           );

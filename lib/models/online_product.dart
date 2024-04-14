@@ -14,9 +14,10 @@ Future<List<OnlineProduct>> fetchOnlineProducts() async {
 }
 
 Future<OnlineProduct> fetchOnlineProduct(int id) async {
+  print('call now http://$endpointUrl/product/id/$id');
   final response = await http.get(Uri.parse('http://$endpointUrl/product/id/$id'));
   if (response.statusCode != 200) {
-    throw Exception('Failed load Online Product by ID');
+    throw Exception('Failed load Online Product by ID @ $id');
   } else {
     return OnlineProduct.fromJson(json.decode(response.body) as Map<String, dynamic>);
   }
@@ -48,7 +49,7 @@ class OnlineProduct {
         title: json['nama'] as String,
         price: json['hjua'] as double,
         description: json['dsc1'] as String,
-        rating: json['rating'] != null ? Rating.fromJson(json['rating']) : null
+        rating: json['rating'] != null ? Rating.fromJson(json['rating']) : Rating(tbid: 0, prdktbid: 0, isFavorite: false, isPopular: false, ratg: 0)
     );
   }
 }
@@ -68,17 +69,17 @@ class Rating {
 
   factory Rating.fromJson(Map<String, dynamic> json) {
     return Rating(
-      tbid: 1,//json['tbid'] as int,
-      prdktbid: 1,//json['prdktbid'] as int,
-      isFavorite: false,//json['fav'] as bool,
-      isPopular: false,//json['popu'] as bool,
-      ratg: 0.0//json['ratg'] as double,
+      tbid: json['tbid'] as int,
+      prdktbid: json['prdktbid'] as int,
+      isFavorite: json['fav'] as bool,
+      isPopular: json['popu'] as bool,
+      ratg: json['ratg'] as double,
     );
   }
 }
 
 // data dummy for testing purposes
-List<OnlineProduct> demoProducts = [
+/*List<OnlineProduct> demoProducts = [
   OnlineProduct(
     id: 1,
     images: [
@@ -139,3 +140,4 @@ List<OnlineProduct> demoProducts = [
 
 const String description =
     "Wireless Controller for PS4™ gives you what you want in your gaming from over precision control your games to sharing …";
+*/

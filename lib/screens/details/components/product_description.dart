@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import '../../../constants.dart';
-// import '../../../models/product.dart';
 import '../../../models/online_product.dart';
 
 class ProductDescription extends StatelessWidget {
@@ -68,7 +68,9 @@ class ProductDescription extends StatelessWidget {
             vertical: 12,
           ),
           child: GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Get.snackbar('Gesture Detector', 'Dipake buat yang lain');
+            },
             child: const Row(
               children: [
                 Text(

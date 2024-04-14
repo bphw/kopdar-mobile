@@ -57,9 +57,11 @@ class DetailsScreen extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    const Text(
-                      "4.7",
-                      style: TextStyle(
+                    Text(
+                      product.rating != null
+                          ? product.rating!.ratg.toString()
+                          : 0.toString(),
+                      style: const TextStyle(
                         fontSize: 14,
                         color: Colors.black,
                         fontWeight: FontWeight.w600,

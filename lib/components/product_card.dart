@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../constants.dart';
 import '../models/online_product.dart';
+import 'package:intl/intl.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
@@ -35,8 +36,10 @@ class ProductCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: product.images.isNotEmpty
-                    ? Image.network(product.images[0])
-                    : Image.asset(product.images[0]),
+                    ? (product.images[0] != null
+                        ? Image.network(product.images[0])
+                        : Image.asset('assets/images/No-image-available.png'))
+                    : Image.asset('assets/images/No-image-available.png'),
               ),
             ),
             const SizedBox(height: 8),
@@ -49,7 +52,7 @@ class ProductCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Rp${product.price}",//\$
+                  NumberFormat.currency(locale: 'id_ID', symbol: 'Rp').format(product.price),
                   style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
