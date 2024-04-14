@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:kopdar_app/components/product_card.dart';
-// import 'package:kopdar_app/models/Product.dart';
-import 'package:kopdar_app/models/OnlineProduct.dart';
-import '../details/details_screen.dart';
+import 'package:kopdar_app/models/online_product.dart';
+import 'package:kopdar_app/screens/details/details_screen.dart';
+import 'package:http/http.dart' as http;
+import 'package:get/get.dart';
 
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({super.key});
-
   @override
   State<FavoriteScreen> createState() => _FavoriteScreenState();
 }
@@ -18,6 +18,8 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   void initState() {
     super.initState();
     futureProducts = fetchOnlineProducts();
+    print('eeeee');
+    print(futureProducts);
   }
 
   @override
@@ -32,34 +34,38 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(16),
-              child: FutureBuilder<List<OnlineProduct>>(
-                  future: futureProducts,
-                  builder: (context, snapshot) =>
-                    snapshot.hasError ? Text('$snapshot.error') :
-                      snapshot.hasData ?
-                        GridView.builder(
-                          itemCount: snapshot.data!.length,
-                          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                            maxCrossAxisExtent: 200,
-                            childAspectRatio: 0.7,
-                            mainAxisSpacing: 20,
-                            crossAxisSpacing: 16,
-                          ),
-                          itemBuilder: (context, index) => ProductCard(
-                            product: snapshot.data![index],
-                            onPress: () => Navigator.pushNamed(
-                              context,
-                              DetailsScreen.routeName,
-                              arguments:
-                              ProductDetailsArguments(product: snapshot.data![index]),
-                            ),
-                          ),
-                        )
-                      : Text('snapshot has no data')
+              child:
+              FutureBuilder<List<OnlineProduct>>(
+                future: futureProducts,
+                builder: (context, snapshot) {
+                  if(snapshot.hasError) {
+                    Get.snackbar('Error',snapshot.error.toString());
+                    return const Center(child: Text('Error favorite screen'));
+                  } else if (snapshot.hasData) {
+                    return GridView.builder(
+                      itemCount: snapshot.data!.length,
+                      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                        maxCrossAxisExtent: 200,
+                        childAspectRatio: 0.7,
+                        mainAxisSpacing: 20,
+                        crossAxisSpacing: 16,
+                      ),
+                      itemBuilder: (context, index) => ProductCard(
+                        product: snapshot.data![index],
+                        onPress: () => Navigator.pushNamed(
+                          context,
+                          DetailsScreen.routeName,
+                          arguments: ProductDetailsArguments(product: snapshot.data![index]),
+                        ),
+                      ),
+                    );
+                  } else {
+                    return const CircularProgressIndicator();
+                  }
+                }
               ),
             ),
-          )
-        ],
+          )],
       ),
     );
   }

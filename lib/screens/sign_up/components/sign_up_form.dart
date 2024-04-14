@@ -16,7 +16,7 @@ class _SignUpFormState extends State<SignUpForm> {
   final _formKey = GlobalKey<FormState>();
   String? email;
   String? password;
-  String? conform_password;
+  String? conformPassword;
   bool remember = false;
   final List<String?> errors = [];
 
@@ -106,14 +106,14 @@ class _SignUpFormState extends State<SignUpForm> {
           const SizedBox(height: 20),
           TextFormField(
             obscureText: true,
-            onSaved: (newValue) => conform_password = newValue,
+            onSaved: (newValue) => conformPassword = newValue,
             onChanged: (value) {
               if (value.isNotEmpty) {
                 removeError(error: kPassNullError);
-              } else if (value.isNotEmpty && password == conform_password) {
+              } else if (value.isNotEmpty && password == conformPassword) {
                 removeError(error: kMatchPassError);
               }
-              conform_password = value;
+              conformPassword = value;
             },
             validator: (value) {
               if (value!.isEmpty) {

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../constants.dart';
-// import '../../../models/Product.dart';
-import '../../../models/OnlineProduct.dart';
+// import '../../../models/product.dart';
+import '../../../models/online_product.dart';
 
 class ProductDescription extends StatelessWidget {
   const ProductDescription({
@@ -33,7 +33,7 @@ class ProductDescription extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             width: 48,
             decoration: BoxDecoration(
-              color: product.isFavourite
+              color: product.rating!.isFavorite
                   ? const Color(0xFFFFE6E6)
                   : const Color(0xFFF5F6F9),
               borderRadius: const BorderRadius.only(
@@ -44,7 +44,7 @@ class ProductDescription extends StatelessWidget {
             child: SvgPicture.asset(
               "assets/icons/Heart Icon_2.svg",
               colorFilter: ColorFilter.mode(
-                  product.isFavourite
+                  product.rating!.isFavorite
                       ? const Color(0xFFFF4848)
                       : const Color(0xFFDBDEE4),
                   BlendMode.srcIn),

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../components/rounded_icon_btn.dart';
 import '../../../constants.dart';
-// import '../../../models/Product.dart';
-import '../../../models/OnlineProduct.dart';
+// import '../../../models/product.dart';
+import '../../../models/online_product.dart';
 
 class ColorDots extends StatelessWidget {
   const ColorDots({
@@ -24,7 +24,7 @@ class ColorDots extends StatelessWidget {
           ...List.generate(
             product.colors.length,
             (index) => ColorDot(
-              color: product.colors[index],
+              color: Color(int.parse(product.colors[index])),
               isSelected: index == selectedColor,
             ),
           ),

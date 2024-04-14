@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kopdar_app/screens/cart/cart_screen.dart';
-
-import '../../models/Product.dart';
-import '../../models/OnlineProduct.dart';
+import 'package:kopdar_app/models/online_product.dart';
 import 'components/color_dots.dart';
 import 'components/product_description.dart';
 import 'components/product_images.dart';
 import 'components/top_rounded_container.dart';
+import 'package:get/get.dart';
 
 class DetailsScreen extends StatelessWidget {
   static String routeName = "/details";
@@ -106,7 +105,8 @@ class DetailsScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
             child: ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, CartScreen.routeName);
+                // Navigator.pushNamed(context, CartScreen.routeName);
+                Get.to(const CartScreen());
               },
               child: const Text("Tambahkan ke keranjang"),
             ),

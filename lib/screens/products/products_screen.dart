@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kopdar_app/components/product_card.dart';
-// import 'package:kopdar_app/models/Product.dart';
-import 'package:kopdar_app/models/OnlineProduct.dart';
-
-import '../details/details_screen.dart';
+import 'package:kopdar_app/controller/cart_controller.dart';
+import 'package:kopdar_app/models/online_product.dart';
+import 'package:kopdar_app/screens/details/details_screen.dart';
+import 'package:get/get.dart';
 
 class ProductsScreen extends StatefulWidget {
-  const ProductsScreen({super.key});
-
   static String routeName = "/products";
   @override
   State<ProductsScreen> createState() => _ProductsScreenState();
@@ -29,13 +27,11 @@ class _ProductsScreenState extends State<ProductsScreen> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: FutureBuilder<List<OnlineProduct>>(
-            future: futureProducts,
-            builder: (context, snapshot) {
-              List<Widget> children;
-              if(snapshot.hasData) {
-                children = <Widget>[GridView.builder(
-                  itemCount: snapshot.data?.length,
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GridView.builder(
+                  itemCount: demoProducts.length,
                   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                     maxCrossAxisExtent: 200,
                     childAspectRatio: 0.7,
@@ -43,50 +39,17 @@ class _ProductsScreenState extends State<ProductsScreen> {
                     crossAxisSpacing: 16,
                   ),
                   itemBuilder: (context, index) => ProductCard(
-                    product: snapshot.data![index],
+                    product: demoProducts[index],
                     onPress: () => Navigator.pushNamed(
                       context,
                       DetailsScreen.routeName,
-                      arguments:
-                      ProductDetailsArguments(product: snapshot.data![index]),
+                      arguments: ProductDetailsArguments(product: demoProducts[index]),
                     ),
                   ),
-                )];
-              } else if(snapshot.hasError) {
-                children = <Widget>[
-                  const Icon(
-                    Icons.error_outline,
-                    color: Colors.red,
-                    size: 60,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16),
-                    child: Text('Error: ${snapshot.error}'),
-                  ),
-                ];
-              }  else {
-                children = const <Widget>[
-                  SizedBox(
-                    width: 60,
-                    height: 60,
-                    child: CircularProgressIndicator(),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 16),
-                    child: Text('Awaiting result...'),
-                  ),
-                ];
-              }
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: children,
-                ),
-              );
-            }
-          )
+                )
+                ]
         ),
       ),
-    );
+    ));
   }
 }

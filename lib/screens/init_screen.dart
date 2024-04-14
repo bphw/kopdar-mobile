@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kopdar_app/constants.dart';
+import 'package:kopdar_app/models/online_product.dart';
 import 'package:kopdar_app/screens/favorite/favorite_screen.dart';
 import 'package:kopdar_app/screens/home/home_screen.dart';
 import 'package:kopdar_app/screens/profile/profile_screen.dart';
@@ -19,12 +20,12 @@ class InitScreen extends StatefulWidget {
 
 class _InitScreenState extends State<InitScreen> {
   int currentSelectedIndex = 0;
-  late Future futureAlbum;
+  late Future<List<OnlineProduct>> futureProducts;
 
   @override
   void initState() {
     super.initState();
-    // futureAlbum = testInternet();
+    futureProducts = fetchOnlineProducts();
 
   }
   void updateCurrentIndex(int index) {

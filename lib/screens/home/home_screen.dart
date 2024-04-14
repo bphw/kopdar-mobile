@@ -23,6 +23,7 @@ class HomeScreen extends StatelessWidget {
               Categories(),
               SpecialOffers(),
               SizedBox(height: 20),
+              // remove const due to PopularProducts has define Controller
               PopularProducts(),
               SizedBox(height: 20),
             ],

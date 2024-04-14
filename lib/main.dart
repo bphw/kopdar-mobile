@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kopdar_app/screens/splash/splash_screen.dart';
-
+import 'package:get/get.dart';
 import 'routes.dart';
 import 'theme.dart';
 
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Kopdar Minimalist App',
       theme: AppTheme.lightTheme(context),
