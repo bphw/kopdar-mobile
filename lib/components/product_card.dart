@@ -34,7 +34,9 @@ class ProductCard extends StatelessWidget {
                   color: kSecondaryColor.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Image.asset(product.images[0]),
+                child: product.images.isNotEmpty
+                    ? Image.network(product.images[0])
+                    : Image.asset(product.images[0]),
               ),
             ),
             const SizedBox(height: 8),
