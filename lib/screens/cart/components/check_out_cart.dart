@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 import 'package:kopdar_app/constants.dart';
 import 'package:kopdar_app/controller/cart_controller.dart';
 import 'package:get/get.dart';
@@ -77,7 +78,7 @@ class CheckoutCard extends StatelessWidget {
                       text: "Total:\n",
                       children: [
                         TextSpan(
-                          text: total.toString(),
+                          text: NumberFormat.currency(decimalDigits:0, locale: 'id_ID', symbol: 'Rp').format(total),
                           style: const TextStyle(fontSize: 16, color: Colors.black),
                         ),
                       ],

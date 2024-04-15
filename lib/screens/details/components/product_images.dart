@@ -26,7 +26,7 @@ class _ProductImagesState extends State<ProductImages> {
           width: 238,
           child: AspectRatio(
             aspectRatio: 1,
-            child: Image.network(widget.product.images[selectedImage]),//Image.asset(widget.product.images[selectedImage]),
+            child: FadeInImage.assetNetwork(placeholder: 'assets/images/loading.gif',image:widget.product.images[selectedImage]),//Image.asset(widget.product.images[selectedImage]),
           ),
         ),
         // SizedBox(height: 20),
@@ -84,7 +84,9 @@ class _SmallProductImageState extends State<SmallProductImage> {
           border: Border.all(
               color: kPrimaryColor.withOpacity(widget.isSelected ? 1 : 0)),
         ),
-        child: Image.network(widget.image),//Image.asset(widget.image),
+        child: FadeInImage.assetNetwork(
+            placeholder: 'assets/images/loading.gif',
+            image:widget.image),//Image.asset(widget.image),
       ),
     );
   }

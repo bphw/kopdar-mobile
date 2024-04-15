@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kopdar_app/controller/cart_controller.dart';
+import 'package:kopdar_app/models/cart.dart';
 import 'package:kopdar_app/screens/cart/cart_screen.dart';
 import 'package:kopdar_app/models/online_product.dart';
 import 'components/color_dots.dart';
@@ -18,6 +20,10 @@ class DetailsScreen extends StatelessWidget {
     final ProductDetailsArguments agrs =
         ModalRoute.of(context)!.settings.arguments as ProductDetailsArguments;
     final product = agrs.product;
+    final CartController c = Get.put(CartController());
+    c.reset();
+    c.selectedProduct(product.id);
+
     return Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: true,
@@ -107,10 +113,12 @@ class DetailsScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
             child: ElevatedButton(
               onPressed: () {
+                c.myCart.removeWhere((element) => element.product == product);
+                c.myCart.add(Cart(product: product, numOfItem: c.qty.toInt()));
                 // Navigator.pushNamed(context, CartScreen.routeName);
-                Get.to(const CartScreen());
+                Get.to(() => const CartScreen());
               },
-              child: const Text("Tambahkan ke keranjang"),
+              child: const Text('Tambahkan ke keranjang'),
             ),
           ),
         ),

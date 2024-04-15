@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-
-import '../../../components/rounded_icon_btn.dart';
-import '../../../constants.dart';
-import '../../../models/online_product.dart';
+import 'package:get/get.dart';
+import 'package:kopdar_app/controller/cart_controller.dart';
+import 'package:kopdar_app/components/rounded_icon_btn.dart';
+import 'package:kopdar_app/constants.dart';
+import 'package:kopdar_app/models/online_product.dart';
 
 class ColorDots extends StatelessWidget {
   const ColorDots({
@@ -14,12 +15,14 @@ class ColorDots extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final CartController c = Get.put(CartController());
     // Now this is fixed and only for demo
     int selectedColor = 3;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         children: [
+          GetX<CartController>(builder: (_) => Text('Jumlah item: ${c.qty}')),
           ...List.generate(
             product.colors.length,
             (index) => ColorDot(
@@ -30,13 +33,19 @@ class ColorDots extends StatelessWidget {
           const Spacer(),
           RoundedIconBtn(
             icon: Icons.remove,
-            press: () {},
+            press: () {
+              if(c.qty > 0) {
+                c.decQty();
+              }
+            },
           ),
           const SizedBox(width: 20),
           RoundedIconBtn(
             icon: Icons.add,
             showShadow: true,
-            press: () {},
+            press: () {
+              c.incQty();
+            },
           ),
         ],
       ),

@@ -37,7 +37,9 @@ class ProductCard extends StatelessWidget {
                 ),
                 child: product.images.isNotEmpty
                     ? (product.images[0].isNotEmpty
-                        ? Image.network(product.images[0])
+                        ? FadeInImage.assetNetwork(
+                    placeholder: 'assets/images/loading.gif',
+                    image:product.images[0])
                         : Image.asset('assets/images/No-image-available.png'))
                     : Image.asset('assets/images/No-image-available.png'),
               ),
@@ -52,7 +54,7 @@ class ProductCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  NumberFormat.currency(locale: 'id_ID', symbol: 'Rp').format(product.price),
+                  NumberFormat.currency(decimalDigits:0, locale: 'id_ID', symbol: 'Rp').format(product.price),
                   style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w600,

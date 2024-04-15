@@ -69,7 +69,7 @@ class ProductDescription extends StatelessWidget {
           ),
           child: GestureDetector(
             onTap: () {
-              Get.snackbar('Gesture Detector', 'Dipake buat yang lain');
+              Get.snackbar('Gesture Detector', 'Test aja');
             },
             child: const Row(
               children: [
